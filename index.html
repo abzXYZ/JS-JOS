@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-JOS</title>
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <link rel="stylesheet" href="webjos.css">
+    <!-- WebMIDI.js library -->
+    <script type="text/javascript" src="http://www.midijs.net/lib/midi.js"></script>
+</head>
+<body>
+    <div class="window" id="consolewindow">
+    <div class="title-bar">
+        <div class="title-bar-text">Command Prompt</div>
+        <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="window-body">
+        <pre id="console">Meowsoft&#10094;•⩊•&#10095; JS-JOS
+&#10094;C&#10095; Copyright Meowsoft Corp 1992-2005.
+        <br>C:&#92;JSJOS&#92;SYSTEM32> <input id="userinput" type="text" autofocus></pre>
+    </div>
+    </div>
+    <input type="file" name="fileinput" id="fileinput" />
+    <!-- scripts -->
+    <script src="global.js" type="module"></script>
+    <script src="commands/commands.js"></script>
+    <script src="webjos.js" type="module"></script>
+</body>
+</html>
