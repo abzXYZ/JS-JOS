@@ -59,11 +59,11 @@ fileinput.addEventListener("change",function(){
 });
 
 
-async function loadCommand(file, cmd, run = false){
+async function loadCommand(file, cmd, rawcmd, run = false){
     try {
         const module = await import(file);
         if (!module) {
-            updateConsole("[ERROR] Couldn't run the command from file.");
+            global.updateConsole("[ERROR] Couldn't run the command from file.");
         } else {
             global.vars.loadedcmds.push(
                 {
@@ -71,11 +71,11 @@ async function loadCommand(file, cmd, run = false){
                     main: module.main
                 }
             );
-            if (run) module.main(); 
+            if (run) module.main(rawcmd);
         }
     } catch (error) {
         console.log(error.message);
-        updateConsole("[ERROR] Couldn't load the command from file.");
+        global.updateConsole("[ERROR] Couldn't load the command from file.");
     }
 }
 
@@ -84,12 +84,12 @@ function parseCommand(cmd, decission){
     const foundCmdInLoaded = global.vars.loadedcmds.find(x => x.command === cmd.split(" ")[0]);
     if(foundCmdInLoaded){
         console.log("Running pre-loaded command");
-        foundCmdInLoaded.main();
+        foundCmdInLoaded.main(cmd);
     } else {
         const foundCmd = commands.find(x => x.command === cmd.split(" ")[0]);
         if(foundCmd){
             console.log("Loading the command");
-            loadCommand("./commands/" + foundCmd.file, foundCmd.command, true);
+            loadCommand("./commands/" + foundCmd.file, foundCmd.command, cmd, true);
         } else {
             global.updateConsole("Unknown command: " + cmd);
         }
